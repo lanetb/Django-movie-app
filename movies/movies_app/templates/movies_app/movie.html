@@ -1,0 +1,16 @@
+{% extends 'movies_app/base.html' %}
+{% block content %}
+<div class="container">
+    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+    <h1>{{ movie.title }}</h1> <p>Release Date: {{ movie.release_date }}</p>
+    <h2>{{ movie.tagline }}</h2>
+    <p>{{ movie.overview }}</p>
+    <p>Genre: 
+        {% for i in movie.genres %}
+            {{ i.name }}  
+        {% endfor %}
+    </p>
+    <p>Runtime: {{ movie.runtime }} mins</p>
+
+</div>
+{% endblock %}
