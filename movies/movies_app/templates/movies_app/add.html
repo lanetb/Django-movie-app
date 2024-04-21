@@ -1,0 +1,11 @@
+{% extends 'movies_app/base.html' %}
+{% block content %}
+<div class="flex flex-col items-center justify-center">
+    <h1 class="text-6xl p-10">Add a Movie</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" class="border-4 border-black">
+        <input type="submit" name="search"  value="Submit" >
+    </form>
+</div>
+{% endblock %}

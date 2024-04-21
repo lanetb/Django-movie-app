@@ -8,8 +8,24 @@
 </head>
 <body>
     <div class="h-screen w-screen flex justify-center">
+        {% if messages %}
+        {% for message in messages %}
+
+        <div id="alert" class="absolute bg-lime-300 w-300px p-5 mt-10 text-slate text-lg rounded-lg" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close bg-lime-600 text-white p-1 rounded-full hover:bg-lime-700 ml-5" onclick="hidealert()">&nbsp;&nbsp;X&nbsp;&nbsp;</button>
+        </div>
+        
+        {% endfor %}
+        {% endif %}
+
         {% block content %}
         {% endblock %}
     </div>
+    <script>
+        function hidealert(){
+            document.getElementById('alert').style.display = 'none';
+        }
+    </script>
 </body>
 </html>

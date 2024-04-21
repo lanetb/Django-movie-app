@@ -2,7 +2,7 @@
 {% block content %}
 <div class="flex flex-col justify-center p-5 m-5 w-80% h-80%">
     <div class="flex flex-row" >
-        
+
         <div id="left" class="flex p-3 basis-1/3 align-center items-center justify-center">
             <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" class="w-300px h-500px">
         </div>
@@ -11,7 +11,7 @@
 
             <div id="title" class="flex flex-row items-center">
                 <h1 class="p-2 text-8xl">{{ movie.title }}</h1>
-                <p class="p-2 text-6xl">({{ movie.release_date }})</p>
+                <p class="p-2 text-6xl">({{ year }})</p>
             </div>
             <h2 class="px-2 text-4xl">{{ movie.tagline }}</h2>
             <p class="px-2 py-4 text-xl">{{ movie.overview }}</p>

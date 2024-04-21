@@ -19,5 +19,17 @@
             text-4xl
             " >
     </form>
+    <form method="POST" class="p-5">
+        {% csrf_token %}
+        <input type="submit" name="add" value="Add a Movie" class="
+                bg-slate-800 
+                p-5 
+                rounded-lg 
+                text-white 
+                hover:bg-slate-600 
+                hover:cursor-pointer
+                text-4xl
+                ">
+    </form>
 </div>
 {% endblock %}

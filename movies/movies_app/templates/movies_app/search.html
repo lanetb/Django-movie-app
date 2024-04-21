@@ -1,0 +1,26 @@
+{% extends 'movies_app/base.html' %}
+{% block content %}
+<div class="flex flex-col items-center">
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" name="add" value="Back" class="bg-slate-800 p-5 rounded-lg text-white hover:bg-slate-600 hover:cursor-pointer text-4xl">
+    </form>
+    {% if movies %}
+    {% for movie in movies %}
+    <div class="flex flex-row items-center">
+        <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" class="w-300px h-500px">
+        <h1 class="text-6xl p-10">{{ movie.title }}</h1>
+        <p class="text-xl">{{ movie.overview }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" name="add_movie_to_database" value="Add" class="bg-slate-800 p-5 rounded-lg text-white hover:bg-slate-600 hover:cursor-pointer text-4xl">
+            <input type="hidden" name="movie_id" value="{{ movie.id }}">
+            <input type="hidden" name="title" value="{{ movie.title }}">
+        </form>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h1 class="text-6xl p-10">No movies found</h1>
+    {% endif %}
+</div>
+{% endblock %}
