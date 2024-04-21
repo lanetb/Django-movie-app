@@ -47,7 +47,7 @@ def index(request: HttpRequest):
             if Movie.objects.filter(title=movie).exists():
                 messages.error(request, f'"{ movie }" already exists in your watchlist!')
                 return render(request, 'movies_app/index.html')
-            movie = Movie(movie_id=id, title=movie, seen=False, review="")
+            movie = Movie(movie_id=id, title=movie, seen=False, review="None")
             movie.save()
             messages.success(request, f'"{ movie }" added to your watchlist!')
             return render(request, 'movies_app/index.html')
