@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpRequest
 import tmdbsimple as tmdb
+from movies_app.models import Movie
 
 # Create your views here.
 def index(request: HttpRequest):
     if request.method == 'POST':
-        movie_title = request.POST['movie_title']
+        movie_title = Movie.objects.order_by('?').first().title
         print(movie_title)
         movie = get_movie_info_id(movie_title)
         context = {
