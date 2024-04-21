@@ -6,9 +6,12 @@ from movies_app.models import Movie
 # Create your views here.
 def index(request: HttpRequest):
     if request.method == 'POST':
-        movie_title = Movie.objects.order_by('?').first().title
-        print(movie_title)
-        movie = get_movie_info_id(movie_title)
+        movie_title = Movie.objects.order_by('?').first()
+        print(movie_title.title)
+        print(movie_title.seen)
+        if movie_title.seen:
+            index(request)
+        movie = get_movie_info_id(movie_title.title)
         context = {
             'movie': movie
         }
@@ -26,5 +29,4 @@ def get_movie_info(title: str):
 def get_movie_info_id(title: str):
     movie = get_movie_info(title)
     movie = tmdb.Movies(movie['id'])
-    print(movie.info())
     return movie.info() if movie else None

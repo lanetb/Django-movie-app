@@ -11,6 +11,16 @@
         {% endfor %}
     </p>
     <p>Runtime: {{ movie.runtime }} mins</p>
-
+</div>
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Reroll">
+    </form>
+    <form>
+        <label for="review">Write the review</label>
+        <textarea type="text" name="review" id="review" value="{{ movie.id }}"></textarea>
+        <input type="submit" value="Submit Watched">
+    </form>
 </div>
 {% endblock %}
