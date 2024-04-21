@@ -6,16 +6,17 @@ from movies_app.models import Movie
 # Create your views here.
 def index(request: HttpRequest):
     if request.method == 'POST':
-        movie_title = Movie.objects.order_by('?').first()
-        print(movie_title.title)
-        print(movie_title.seen)
-        if movie_title.seen:
-            index(request)
-        movie = get_movie_info_id(movie_title.title)
-        context = {
-            'movie': movie
-        }
-        return render(request, 'movies_app/movie.html', context)
+        if 'roll' in request.POST:
+            movie_title = Movie.objects.order_by('?').first()
+            print(movie_title.title)
+            print(movie_title.seen)
+            if movie_title.seen:
+                index(request)
+            movie = get_movie_info_id(movie_title.title)
+            context = {
+                'movie': movie
+            }
+            return render(request, 'movies_app/movie.html', context)
 
     return render(request, 'movies_app/index.html')
 

@@ -1,10 +1,23 @@
 {% extends 'movies_app/base.html' %}
 {% block content %}
-<div class="container">
-    <h1>Movies</h1>
-    <form method="POST" >
+<div class="flex flex-col items-center justify-center">
+    <div class="">
+        <h1 class="text-6xl p-10 mt-[-200px]">Random Movie Selector</h1>
+    </div>
+    
+    <form method="POST" class="">
         {% csrf_token %}
-        <input type="submit" value="Get A Movie">
+        <input type="submit" name="roll" value="Click to Roll" 
+            class=
+            "
+            bg-slate-800 
+            p-5 
+            rounded-lg 
+            text-white 
+            hover:bg-slate-600 
+            hover:cursor-pointer
+            text-4xl
+            " >
     </form>
 </div>
 {% endblock %}
