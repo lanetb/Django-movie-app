@@ -2,7 +2,11 @@ from django.shortcuts import render
 from django.http import HttpRequest
 import tmdbsimple as tmdb
 from movies_app.models import Movie
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+tmdb.API_KEY = os.getenv("API_KEY")
 # Create your views here.
 def index(request: HttpRequest):
     if request.method == 'POST':
@@ -19,8 +23,6 @@ def index(request: HttpRequest):
             return render(request, 'movies_app/movie.html', context)
 
     return render(request, 'movies_app/index.html')
-
-tmdb.API_KEY = "20a8735681dba8eec22c80c76415287e"
 
 def get_movie_info(title: str):
     search = tmdb.Search()
