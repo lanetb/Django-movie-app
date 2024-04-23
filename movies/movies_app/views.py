@@ -18,7 +18,7 @@ def index(request: HttpRequest):
             print(movie_title.title)
             print(movie_title.seen)
             if movie_title.seen:
-                index(request)
+                movie_title = reroll()
             if movie_title.movie_id == 0:
                 movie = get_movie_info_title(movie_title.title)
                 movie_title.movie_id = movie['id']
@@ -55,6 +55,12 @@ def index(request: HttpRequest):
             return render(request, 'movies_app/index.html')
 
     return render(request, 'movies_app/index.html')
+
+def reroll():
+    movie_title = Movie.objects.order_by('?').first()
+    if movie_title.seen:
+        return reroll()
+    return movie_title
 
 def get_movie_list(title: str):
     search = tmdb.Search()
