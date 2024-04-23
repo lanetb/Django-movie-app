@@ -14,17 +14,7 @@ tmdb.API_KEY = os.getenv("API_KEY")
 def index(request: HttpRequest):
     if request.method == 'POST':
         if 'roll' in request.POST:
-            movie_title = Movie.objects.order_by('?').first()
-            print(movie_title.title)
-            print(movie_title.seen)
-            if movie_title.seen:
-                movie_title = reroll()
-            if movie_title.movie_id == 0:
-                movie = get_movie_info_title(movie_title.title)
-                movie_title.movie_id = movie['id']
-                movie_title.save()
-            else:
-                movie = get_movie_info_idd(movie_title.movie_id)
+            movie = roll()
             context = {
                 'movie': movie,
                 'year': movie['release_date'][:4],
@@ -56,11 +46,21 @@ def index(request: HttpRequest):
 
     return render(request, 'movies_app/index.html')
 
-def reroll():
+def roll():
     movie_title = Movie.objects.order_by('?').first()
+    print(movie_title.title)
+    print(movie_title.seen)
     if movie_title.seen:
-        return reroll()
-    return movie_title
+        roll()
+    if movie_title.movie_id == 0:
+        movie = get_movie_info_title(movie_title.title)
+        movie_title.movie_id = movie['id']
+        movie_title.save()
+    else:
+        movie = get_movie_info_id(movie_title.movie_id)
+    if movie == None:
+        roll()
+    return movie
 
 def get_movie_list(title: str):
     search = tmdb.Search()
@@ -77,6 +77,6 @@ def get_movie_info_title(title: str):
     movie = tmdb.Movies(movie['id'])
     return movie.info() if movie else None
 
-def get_movie_info_idd(id: int):
+def get_movie_info_id(id: int):
     movie = tmdb.Movies(id)
     return movie.info() if movie else None
