@@ -5,10 +5,12 @@ from movies_app.models import Movie
 from dotenv import load_dotenv
 import os
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 
 load_dotenv()
 tmdb.API_KEY = os.getenv("API_KEY")
 # Create your views here.
+@csrf_exempt
 def index(request: HttpRequest):
     if request.method == 'POST':
         if 'roll' in request.POST:

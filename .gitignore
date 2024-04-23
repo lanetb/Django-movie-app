@@ -1,4 +1,5 @@
 venv
 .env
 db.sqlite3
-movies/uwsgi.ini
+conf/gunicorn_conf.py
+conf/
