@@ -1,37 +1,115 @@
 {% extends 'movies_app/base.html' %}
 {% block content %}
 <div class="flex flex-col justify-center p-5 m-5 w-80% h-80%">
-    <div class="flex flex-row" >
+    <div class="flex flex-row border-3 border-white text-white" >
 
-        <div id="left" class="flex p-3 basis-1/3 align-center items-center justify-center">
-            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" class="w-300px h-500px">
-        </div>
 
-        <div id="right" class="basis-2/3 flex flex-col">
+        <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" class="object-fill pl-12 pr-10">
 
-            <div id="title" class="flex flex-row items-center">
-                <h1 class="p-2 text-8xl">{{ movie.title }}</h1>
-                <p class="p-2 text-6xl">({{ year }})</p>
+
+        <div id="right" class="basis-2/3 flex flex-col rounded-lg copse-regular w-100% justify-center">
+
+            <div id="title" class="flex flex-row items-center bungee-regular ">
+                <h1 class="p-2 text-[4em] shrink-1">{{ movie.title }} 
+                <span class="text-[.75em]">({{ year }})</span></h1>
             </div>
-            <h2 class="px-2 text-4xl">{{ movie.tagline }}</h2>
+            <h2 class="px-2 text-[2.5em]">{{ movie.tagline }}</h2>
             <p class="px-2 py-4 text-xl">{{ movie.overview }}</p>
             <p class="p-2 text-xl">Genre: 
             {% for i in movie.genres %}
-                {{ i.name }}  
+                {% if not forloop.last %} 
+                    {{ i.name }}, 
+                {% else %}
+                    {{ i.name }}
+                {% endif %}  
             {% endfor %}
             </p>
             <p class="px-2 text-xl">Runtime: {{ movie.runtime }} mins</p>
 
-            <div>
-                <form>
+            <div class="p-5 flex flex-row gap-5">
+                <form method="POST" class="mt-10">
                     {% csrf_token %}
-                    <label for="review">Write the review</label>
-                    <textarea type="text" name="review" id="review" value="{{ movie.id }}"></textarea>
-                    <input type="submit" name="reviewed" value="Submit Watched">
+                    <div class="group relative">
+                        <button type="submit" name="Home" value="Home" class="text-lg">
+                            <svg stroke-linecap="round" stroke-width="2" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"
+                                fill="white" stroke="white"
+                                class="w-12 hover:scale-125 duration-200 hover:stroke-blue-500 text-white color-white">
+                                <path 
+                                    d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z">
+                                </path>
+                            </svg>
+                        </button>
+                        <span class="absolute -top-14 left-[50%] -translate-x-[50%] 
+                                                        z-20 origin-left scale-0 px-3 rounded-lg border 
+                                                        border-gray-300 bg-white py-2 text-sm font-bold
+                                                        shadow-md transition-all duration-300 ease-in-out 
+                                                        group-hover:scale-100 text-black">Home<span>
+                            </span></span>
+                    </div>
                 </form>
-                <form method="POST">
+
+                <form method="POST" class="mt-10">
                     {% csrf_token %}
-                    <input type="submit" name="roll" value="Reroll" class="ml-2 mt-4 p-2 bg-slate-800 hover:bg-slate-600 hover:cursor-pointer rounded-lg text-xl text-white" >
+                    <div class="group relative">
+                        <button type="submit" name="roll" value="Reroll" class="text-lg">
+                            <svg stroke-linecap="round" stroke-width="2" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" fill="white" stroke="white" class="w-12 hover:scale-125 duration-200 hover:stroke-blue-500 text-white color-white">
+                                
+                                <path
+                                    d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z">
+                                </path>
+                            </svg>
+                        </button>
+                        <span class="absolute -top-14 left-[50%] -translate-x-[50%] 
+                                        z-20 origin-left scale-0 px-3 rounded-lg border 
+                                        border-gray-300 bg-white py-2 text-sm font-bold
+                                        shadow-md transition-all duration-300 ease-in-out 
+                                        group-hover:scale-100 text-black">Reroll<span>
+                            </span></span>
+                    </div>
+                </form>
+
+                <form method="POST" class="mt-10">
+                    {% csrf_token %}
+                    <div class="group relative">
+                        <button type="submit" name="review" value="Review" class="text-lg">
+                            <svg stroke-linecap="round" stroke-width="2" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"
+                                fill="white" stroke="white"
+                                class="w-12 hover:scale-125 duration-200 hover:stroke-blue-500 text-white color-white">
+                
+                                <path
+                                    d="M240-400h122l200-200q9-9 13.5-20.5T580-643q0-11-5-21.5T562-684l-36-38q-9-9-20-13.5t-23-4.5q-11 0-22.5 4.5T440-722L240-522v122Zm280-243-37-37 37 37ZM300-460v-38l101-101 20 18 18 20-101 101h-38Zm121-121 18 20-38-38 20 18Zm26 181h273v-80H527l-80 80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z">
+                                </path>
+                            </svg>
+                        </button>
+                        <span class="absolute -top-14 left-[50%] -translate-x-[50%] 
+                                                        z-20 origin-left scale-0 px-3 rounded-lg border 
+                                                        border-gray-300 bg-white py-2 text-sm font-bold
+                                                        shadow-md transition-all duration-300 ease-in-out 
+                                                        group-hover:scale-100 text-black">Review<span>
+                            </span></span>
+                    </div>
+                </form>
+
+                <form method="POST" class="mt-10">
+                    {% csrf_token %}
+                    <div class="group relative">
+                        <button type="submit" name="remove" value="Remove" class="text-lg">
+                            <svg stroke-linecap="round" stroke-width="2" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"
+                                fill="white" stroke="white"
+                                class="w-12 hover:scale-125 duration-200 hover:stroke-blue-500 text-white color-white">
+                
+                                <path
+                                    d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" >
+                                </path>
+                            </svg>
+                        </button>
+                        <span class="absolute -top-14 left-[50%] -translate-x-[50%] 
+                                                                        z-20 origin-left scale-0 px-3 rounded-lg border 
+                                                                        border-gray-300 bg-white py-2 text-sm font-bold
+                                                                        shadow-md transition-all duration-300 ease-in-out 
+                                                                        group-hover:scale-100 text-black">Remove<span>
+                            </span></span>
+                    </div>
                 </form>
 
             </div>

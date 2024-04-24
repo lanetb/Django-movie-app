@@ -1,11 +1,20 @@
 {% extends 'movies_app/base.html' %}
 {% block content %}
 <div class="flex flex-col items-center justify-center">
-    <h1 class="text-6xl p-10">Add a Movie</h1>
-    <form method="POST">
+    <div class="content p-10 mt-[-300px]">
+        <h1 class="p-10 text_shadows ">Add a Movie</h1>
+    </div>
+    <form method="POST" class="flex flex-row h-[80px] gap-1">
         {% csrf_token %}
-        <input type="text" name="title" class="border-4 border-black">
-        <input type="submit" name="search"  value="Submit" >
+        <input type="text" name="title" class="rounded-l-lg border-4 border-white h-[80px] w-[500px] text-5xl copse-regular">
+        <button name="search" value="Search"class="bg-white h-[80px] border-white border-4 w-[80px] hover:bg-lime-400 hover:border-lime-400 rounded-r-lg relative">
+            <div class="w-100% h-100% flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" class="w-[40px]">
+                    <path
+                        d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+                </svg>
+            </div>
+        </button>
     </form>
 </div>
 {% endblock %}
