@@ -156,7 +156,7 @@ Mud,False,None
 Mayhem,False,None
 Space sweepers,False,None
 Upgrade,False,None
-Train wreck,False,None
+Trainwreck,False,None
 Slumdog Millionaire,False,None
 The voices,False,None
 Rounders,False,None
@@ -164,7 +164,7 @@ Colosal,False,None
 Role models,False,None
 Wanted,False,None
 Pearl Harbor,False,None
-Rim of the world,True,None
+Rim of the world,False,None
 The day of the jackal,False,None
 The departed,False,None
 Loaded weapon,False,None

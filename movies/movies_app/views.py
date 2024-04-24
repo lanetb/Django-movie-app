@@ -51,15 +51,18 @@ def roll():
     print(movie_title.title)
     print(movie_title.seen)
     if movie_title.seen:
-        roll()
-    if movie_title.movie_id == 0:
-        movie = get_movie_info_title(movie_title.title)
-        movie_title.movie_id = movie['id']
-        movie_title.save()
+        print("reroll seen movie")
+        movie = roll()
     else:
-        movie = get_movie_info_id(movie_title.movie_id)
+        if movie_title.movie_id == 0:
+            print("movie id 0")
+            movie = get_movie_info_title(movie_title.title)
+            movie_title.movie_id = movie['id']
+            movie_title.save()
+        else:
+            movie = get_movie_info_id(movie_title.movie_id)
     if movie == None:
-        roll()
+        movie = roll()
     return movie
 
 def get_movie_list(title: str):
