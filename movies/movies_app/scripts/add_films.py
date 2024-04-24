@@ -1,14 +1,33 @@
-from movies_app.models import Movie
 import csv
+import os
+import tmdbsimple as tmdb
+from movies_app.models import Watchlist, Seenlist
+from dotenv import load_dotenv
+
+
 
 def run():
+    load_dotenv()
+    tmdb.API_KEY = os.getenv("API_KEY")
     with open('movies.csv', 'r', encoding='utf-8') as f:
         reader = csv.reader(f)
         next(reader)
 
-        Movie.objects.all().delete()
+        Watchlist.objects.all().delete()
+        Seenlist.objects.all().delete()
+        tmdb.API_KEY = os.getenv('API_KEY')
 
         for row in reader:
             print(row)
-            movie = Movie(title=row[0], seen=row[1], review=row[2])
-            movie.save()
+            search = tmdb.Search()
+            response = search.movie(query=row[0])
+            movie = response['results'] if response['total_results'] > 0 else None
+
+            if movie:
+                movie = movie[0]
+                if row[1] == 'True':
+                    movie = Seenlist(title=row[0], movie_id=movie['id'])
+                    movie.save()
+                else:
+                    movie = Watchlist(title=row[0], movie_id=movie['id'])
+                    movie.save()
