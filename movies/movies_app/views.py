@@ -23,7 +23,6 @@ def index(request: HttpRequest):
         elif 'add' in request.POST:
             return render(request, 'movies_app/add.html')
         elif 'search' in request.POST:
-            print(request.POST['search'])
             movies = get_movie_list(request.POST['title'])
             context = {
                 'movies': movies,
@@ -47,7 +46,6 @@ def index(request: HttpRequest):
 
 def roll():
     movie_to_watch = Watchlist.objects.order_by('?').first()
-    print(movie_to_watch.title)
     movie_details = get_movie_info_by_id(movie_to_watch.movie_id)
     return movie_details
 
