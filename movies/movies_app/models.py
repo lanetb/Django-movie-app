@@ -6,6 +6,9 @@ class Watchlist(models.Model):
     movie_id = models.IntegerField(default=0)
     title = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.title
+
 class Seenlist(models.Model):   
     id = models.AutoField(primary_key=True)
     movie_id = models.IntegerField(default=0)
