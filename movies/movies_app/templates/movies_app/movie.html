@@ -1,7 +1,7 @@
 {% extends 'movies_app/base.html' %}
 {% block content %}
-<div class="flex flex-col justify-center p-5 m-5 w-80% h-80%">
-    <div class="flex flex-row border-3 border-white text-white" >
+<div class="flex flex-col justify-center p-5 w-80% h-screen">
+    <div class="flex flex-row border-3 border-white text-white h-100%" >
 
 
         <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" class="object-fill pl-12 pr-10">
@@ -68,8 +68,9 @@
                     </div>
                 </form>
 
-                <form method="POST" class="mt-10">
+                <form method="POST" class="mt-10" id="Review">
                     {% csrf_token %}
+                    <input type="hidden" name="movie_id" value="{{ movie.id }}">
                     <div class="group relative">
                         <button type="submit" name="review" value="Review" class="text-lg">
                             <svg stroke-linecap="round" stroke-width="2" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"

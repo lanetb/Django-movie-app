@@ -1,6 +1,6 @@
 {% extends 'movies_app/base.html' %}
 {% block content %}
-<div class="flex flex-col items-center justify-center">
+<div class="flex flex-col items-center justify-center h-screen">
     <div class="content p-10 mt-[-50px]">
         <h1 class="p-10 text_shadows ">Random Movie</h1>
     </div>
@@ -12,7 +12,7 @@
             <span class="front"></span>
         </button>
     </form>
-    <div class="p-10">
+    <div class="p-10 flex flex-row gap-5">
         <form method="POST" class="p-10">
             {% csrf_token %}
             <input type="submit" name="add" value="Add a Movie" class="
@@ -26,6 +26,18 @@
                     copse-regular
                     ">
         </form>
+        <form method="POST" class="p-10">
+            {% csrf_token %}
+            <input type="submit" name="blog" value="See the Reviews" class="
+                    bg-slate-800 
+                    p-5 
+                    rounded-lg 
+                    text-white 
+                    hover:bg-slate-600 
+                    hover:cursor-pointer
+                    text-4xl
+                    copse-regular
+                    ">
     </div>
 </div>
 {% endblock %}

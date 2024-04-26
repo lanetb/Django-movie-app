@@ -1,0 +1,21 @@
+{% extends 'movies_app/base.html' %}
+{% block content %}
+<div class="flex flex-col justify-center w-screen h-screen">
+    <h1 class="text-4xl text-white bungee-regular p-5 w-[800px]">  Review for {{ movie.title }}:</h1>
+    
+    <form id="form" method="POST" class="flex flex-col p-10 text-black w-[900px] h-{500px} justify-center">
+        <div id="editor" class="bg-white text-wrap">
+            
+        </div>
+
+        <input type="submit" name="submit_review" value="Submit Review">
+    </form>
+</div>
+<script>
+    const quill = new Quill('#editor', {
+        theme: 'snow',
+        placeholder: 'Compose an epic review...',
+        bounds: '#form',
+    });
+</script>
+{% endblock %}

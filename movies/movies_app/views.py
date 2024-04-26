@@ -6,6 +6,7 @@ import os
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from movies_app.models import Watchlist, Seenlist
+from datetime import date
 
 load_dotenv()
 tmdb.API_KEY = os.getenv("API_KEY")
@@ -41,6 +42,30 @@ def index(request: HttpRequest):
             movie.save()
             messages.success(request, f'"{ movie }" added to your watchlist!')
             return render(request, 'movies_app/index.html')
+        elif 'review' in request.POST:
+            movie = Watchlist.objects.get(movie_id=request.POST['movie_id'])
+            context = {
+                'movie': movie,
+            }
+            return render(request, 'movies_app/review.html', context)
+        elif 'add_review' in request.POST:
+            movie_name = request.POST['movie_name']
+            movie_id = request.POST['movie_id']
+            review_text = request.POST['review']
+            rating = request.POST['rating']
+            review = Seenlist(movie_id=movie_id, title=movie_name, review=review_text, rating=rating, date_watched=date.today())
+            review.save()
+            #remove from watchlist
+            Watchlist.objects.filter(movie_id=movie.movie_id).delete()
+            messages.success(request, f'"{ movie }" review added!')
+            
+            return render(request, 'movies_app/index.html')
+        elif 'blog' in request.POST:
+            reviews = Seenlist.objects.all()
+            context = {
+                'reviews': reviews,
+            }
+            return render(request, 'movies_app/blog.html', context)
 
     return render(request, 'movies_app/index.html')
 
