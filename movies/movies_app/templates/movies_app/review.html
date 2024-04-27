@@ -1,21 +1,25 @@
 {% extends 'movies_app/base.html' %}
 {% block content %}
-<div class="flex flex-col justify-center w-screen h-screen">
-    <h1 class="text-4xl text-white bungee-regular p-5 w-[800px]">  Review for {{ movie.title }}:</h1>
+<div class="flex flex-col items-center justify-center w-full h-screen">
+    <h1 class="text-4xl text-white bungee-regular p-5">  Review for <span class="text-cyan-300">{{ movie.title }}</span>:</h1>
     
-    <form id="form" method="POST" class="flex flex-col p-10 text-black w-[900px] h-{500px} justify-center">
+    <form id="form" method="POST" class="flex flex-col p-2 text-black w-[900px] h-{500px} justify-center">
+        {% csrf_token %}
+        <input type="hidden" name="movie_id" value="{{ movie.movie_id }}">
+        <input type="hidden" name="title" value="{{ movie.title }}">
         <div id="editor" class="bg-white text-wrap">
             
         </div>
-
-        <input type="submit" name="submit_review" value="Submit Review">
+        <div class="flex flex-col justify-between py-5">
+            <textarea name="text"  id="hiddenArea" class="p-2 mb-2 rounded-md"></textarea>
+            <div class="flex flex-row justify-between">
+                <div>
+                    <input type="number" name="rating" min="0" max="100" placeholder="Rating" class="bg-white text-black p-2 w-[70px] rounded-md text-md copse-regular">
+                    <label for="rating" class="text-white" class>/100</label>
+                </div>
+                <input type="submit" name="submit_review" value="Submit Review" class="p-2 bg-white rounded-lg hover:bg-lime-300 hover:cursor-pointer">
+            </div>
+        </div>
     </form>
 </div>
-<script>
-    const quill = new Quill('#editor', {
-        theme: 'snow',
-        placeholder: 'Compose an epic review...',
-        bounds: '#form',
-    });
-</script>
 {% endblock %}

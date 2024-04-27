@@ -23,7 +23,7 @@ def run():
             response = search.movie(query=row[0])
             movie = response['results'] if response['total_results'] > 0 else None
 
-            if movie:
+            if movie and not Watchlist.objects.filter(movie_id = movie[0]["id"]).exists() and not Seenlist.objects.filter(movie_id = movie[0]["id"]).exists():
                 movie = movie[0]
                 if row[1] == 'True':
                     movie = Seenlist(title=row[0], movie_id=movie['id'])

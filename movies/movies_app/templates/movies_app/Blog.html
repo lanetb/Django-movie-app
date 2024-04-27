@@ -1,9 +1,9 @@
 {% extends 'movies_app/base.html' %}
 {% block content %}
-<div class="flex flex-col justify-center w-screen justify-center items-center">
+<div class="flex flex-col justify-center justify-center items-center">
     <h1 class="text-4xl text-white bungee-regular p-5">Reviews</h1>
 
-    <div class="flex flex-col justify-center w-screen justify-center items-center">
+    <div class="flex flex-col justify-center justify-center items-center">
         <div class="flex flex-col text-white w-[900px] justify-center gap-6">
             {% for review in reviews %}
                 <div class="flex flex-row border-[3px] border-white rounded-lg">
@@ -11,11 +11,14 @@
                         <div class="border-b-2 border-white py-2">
                             <h1 class="text-3xl capitalize bungee-regular text-cyan-300">&nbsp;&nbsp;{{ review.title }}</h1>
                         </div>
-                        
-                        <p class="copse-regular text-lg py-3 px-5">{{ review.content }}</p>
+                        {% if review.review %}
+                            <p class="copse-regular text-lg py-3 px-5">{{ review.review }}</p>
+                        {% else %}
+                            <p class="copse-regular text-lg py-3 px-5">I watched this movie before I made this website. There will be no review for it unless I rewatch it or take the time to go back and write a review for all of these.</p>
+                        {% endif %}
 
-                        <div class="flex flex-row border-white border-t-2 justify-end">
-                            <h1 class="text-md capitalize bungee-regular text-left p-2">{{ review.date_watched }}</h1>
+                        <div class="flex flex-row border-white  justify-end">
+                            <h1 class="text-xs capitalize bungee-regular text-left p-2">{{ review.date_watched }}</h1>
                         </div>
                     </div>
                     <div class="flex flex-col p-5 basis-1/5 border-l-2 border-white justify-center items-center">

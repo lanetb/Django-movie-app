@@ -1,9 +1,9 @@
 {% extends 'movies_app/base.html' %}
 {% block content %}
-<div class="flex flex-col items-center w-100% h-full">
+<div class="flex flex-col items-center">
     <h1 class="p-5 text-4xl text-white bungee-regular">Search Results: </h1>
     {% if movies %}
-    <div class="grid grid-cols-4 w-100% h-100% p-5 gap-4">
+    <div class="grid grid-cols-4 w-100% h-100% gap-4 p-5">
         {% for movie in movies %}
             <div class="flex flex-row h-[200px]w-[360px] text-white border-white border-2 rounded-lg p-2 gap-2">
                 <div class="flex justify-center h-[200px] shrink-0 border-white basis-32 ">
