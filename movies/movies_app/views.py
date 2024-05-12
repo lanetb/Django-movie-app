@@ -21,14 +21,17 @@ def index(request: HttpRequest):
                 'year': movie['release_date'][:4],
             }
             return render(request, 'movies_app/movie.html', context)
+            
         elif 'add' in request.POST:
             return render(request, 'movies_app/add.html')
+        
         elif 'search' in request.POST:
             movies = get_movie_list(request.POST['title'])
             context = {
                 'movies': movies,
             }
             return render(request, 'movies_app/search.html', context)
+        
         elif 'add_movie_to_database' in request.POST:
             movie = request.POST['title']
             id = request.POST['movie_id']
@@ -42,12 +45,14 @@ def index(request: HttpRequest):
             movie.save()
             messages.success(request, f'"{ movie }" added to your watchlist!')
             return render(request, 'movies_app/index.html')
+        
         elif 'review' in request.POST:
             movie = Watchlist.objects.get(movie_id=request.POST['movie_id'])
             context = {
                 'movie': movie,
             }
             return render(request, 'movies_app/review.html', context)
+        
         elif 'submit_review' in request.POST:
             movie_name = request.POST['title']
             movie_id = request.POST['movie_id']
