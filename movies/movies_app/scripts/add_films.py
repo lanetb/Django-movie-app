@@ -4,8 +4,6 @@ import tmdbsimple as tmdb
 from movies_app.models import Watchlist, Seenlist
 from dotenv import load_dotenv
 
-
-
 def run():
     load_dotenv()
     tmdb.API_KEY = os.getenv("API_KEY")
