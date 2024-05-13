@@ -29,7 +29,7 @@ def index(request: HttpRequest):
 
         elif 'search' in request.POST:
             movies = get_movie_list(request.POST['title'])
-            print(movies)
+
             context = {
                 'movies': movies,
             }
@@ -55,7 +55,7 @@ def index(request: HttpRequest):
 
         elif 'review' in request.POST:
             movie = Watchlist.objects.get(movie_id=request.POST['movie_id'])
-            print(movie)
+
             context = {
                 'movie': movie,
             }
@@ -67,7 +67,7 @@ def index(request: HttpRequest):
             overview = request.POST['overview']
             poster_url = f'https://image.tmdb.org/t/p/w500{request.POST["poster_url"]}'
             movie = {'title': title, 'movie_id': movie_id, 'overview': overview, 'poster_url': poster_url}
-            print(movie)
+
             context = {
                 'movie': movie,
             }
