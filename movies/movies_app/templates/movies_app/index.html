@@ -38,6 +38,20 @@
                     text-4xl
                     copse-regular
                     ">
+        </form>
+        <form method="POST" class="p-10">
+            {% csrf_token %}
+            <input type="submit" name="watchlist" value="Watchlist" class="
+                            bg-slate-800 
+                            p-5 
+                            rounded-lg 
+                            text-white 
+                            hover:bg-slate-600 
+                            hover:cursor-pointer
+                            text-4xl
+                            copse-regular
+                            ">
+        </form>
     </div>
 </div>
 {% endblock %}

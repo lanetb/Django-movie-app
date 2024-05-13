@@ -45,7 +45,7 @@ def index(request: HttpRequest):
                 messages.error(
                     request, f'"{movie}" already exists in your seenlist!')
                 return render(request, 'movies_app/index.html')
-            movie = Watchlist(movie_id=id, title=movie)
+            movie = Watchlist(movie_id=id, title=movie, )
             movie.save()
             messages.success(request, f'"{movie}" added to your watchlist!')
             return render(request, 'movies_app/index.html')
@@ -64,7 +64,7 @@ def index(request: HttpRequest):
             rating = request.POST['rating']
             # remove from watchlist
             temp = Watchlist.objects.filter(movie_id=movie_id)
-            temp.delete()
+            
             # check if movie already exists in seenlist
             if Seenlist.objects.filter(movie_id=movie_id).exists():
                 messages.error(
@@ -72,9 +72,9 @@ def index(request: HttpRequest):
                 return render(request, 'movies_app/index.html')
             # add to seenlist
             review = Seenlist(movie_id=movie_id, title=movie_name,
-                              review=review_text, rating=rating, date_watched=date.today())
+                              review=review_text, rating=rating, date_watched=date.today(), overview=temp[0].overview)
             review.save()
-
+            temp.delete()
             messages.success(request, f'"{movie_name}" review added!')
             return render(request, 'movies_app/index.html')
 
@@ -84,6 +84,13 @@ def index(request: HttpRequest):
                 'reviews': reviews,
             }
             return render(request, 'movies_app/blog.html', context)
+        
+        elif 'watchlist' in request.POST:
+            movies = Watchlist.objects.all()
+            context = {
+                'movies': movies,
+            }
+            return render(request, 'movies_app/watchlist.html', context)
 
     return render(request, 'movies_app/index.html')
 

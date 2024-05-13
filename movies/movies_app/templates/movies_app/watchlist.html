@@ -1,23 +1,27 @@
 {% extends 'movies_app/base.html' %}
 {% block content %}
-    <div class="flex flex-col items-center">
-        <h1 class="p-5 text-4xl text-white bungee-regular">Search Results: </h1>
-        {% if movies %}
-            <div class="grid grid-cols-4 w-100% h-100% gap-4 p-5">
-                {% for movie in movies %}
-                <div class="flex flex-row h-[200px]w-[360px] text-white border-white border-2 rounded-lg p-2 gap-2">
-                    <div class="flex flex-col h-[200px] overflow-hidden relative">
-                        <h1 class="text-white text-md bungee-regular truncate hover:text-wrap hover:text-xs">{{ movie.title }}
-                        </h1>
-                        <div class="h-[120px] overflow-hidden text-ellipsis">
-                            <p class="text-ellipsis h-[120px]">{{ movie.overview }}</p>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
+<div class="flex flex-col items-center">
+    <h1 class="p-5 text-4xl text-white bungee-regular">Watchlist</h1>
+    {% if movies %}
+    <div class="grid grid-cols-4 w-100% h-100% gap-4 p-5">
+        {% for movie in movies %}
+        <div class="flex flex-row text-white border-white border-2 rounded-lg overflow-hidden gap-2">
+            <div class="flex justify-center h-[200px] shrink-0 border-white basis-32 ">
+                <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="object-cover">
             </div>
-        {% else %}
-            <h1 class="text-6xl p-10">No movies found</h1>
-        {% endif %}
+
+            <div class="flex flex-col h-[200px] overflow-hidden relative hover:h-fit">
+                <h1 class="text-white text-md bungee-regular truncate hover:text-wrap ">{{ movie.title }}</h1>
+                <div class="h-[120px] overflow-hidden text-ellipsis hover:text-wrap hover:h-fit">
+                    <p class="text-ellipsis h-[120px] hover:h-fit">{{ movie.overview }}</p>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
     </div>
+    {% else %}
+    <h1 class="text-6xl p-10">No movies found</h1>
+    {% endif %}
+</div>
 {% endblock %}
