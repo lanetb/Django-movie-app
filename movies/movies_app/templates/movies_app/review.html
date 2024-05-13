@@ -7,6 +7,7 @@
         {% csrf_token %}
         <input type="hidden" name="movie_id" value="{{ movie.movie_id }}">
         <input type="hidden" name="title" value="{{ movie.title }}">
+        <input type="hidden" name="overview" value="{{ movie.overview }}">
         <div id="editor" class="bg-white text-wrap">
             
         </div>

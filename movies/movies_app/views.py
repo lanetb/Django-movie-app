@@ -29,6 +29,7 @@ def index(request: HttpRequest):
 
         elif 'search' in request.POST:
             movies = get_movie_list(request.POST['title'])
+            print(movies)
             context = {
                 'movies': movies,
             }
@@ -36,24 +37,37 @@ def index(request: HttpRequest):
 
         elif 'add_movie_to_database' in request.POST:
             movie = request.POST['title']
-            id = request.POST['movie_id']
+            movie_id = request.POST['movie_id']
             overview = request.POST['overview']
             poster_url = f'https://image.tmdb.org/t/p/w500{request.POST['poster_url']}'
-            if Watchlist.objects.filter(movie_id=id).exists():
+            if Watchlist.objects.filter(movie_id=movie_id).exists():
                 messages.error(
                     request, f'"{movie}" already exists in your watchlist!')
                 return render(request, 'movies_app/index.html')
-            if Seenlist.objects.filter(movie_id=id).exists():
+            if Seenlist.objects.filter(movie_id=movie_id).exists():
                 messages.error(
                     request, f'"{movie}" already exists in your seenlist!')
                 return render(request, 'movies_app/index.html')
-            movie = Watchlist(movie_id=id, title=movie, overview=overview, poster_url=poster_url)
+            movie = Watchlist(movie_id=movie_id, title=movie, overview=overview, poster_url=poster_url)
             movie.save()
             messages.success(request, f'"{movie}" added to your watchlist!')
             return render(request, 'movies_app/index.html')
 
         elif 'review' in request.POST:
-            movie = Watchlist.objects.get(id=request.POST['movie_id'])
+            movie = Watchlist.objects.get(movie_id=request.POST['movie_id'])
+            print(movie)
+            context = {
+                'movie': movie,
+            }
+            return render(request, 'movies_app/review.html', context)
+
+        elif 'review_new' in request.POST:
+            title = request.POST['title']
+            movie_id = request.POST['movie_id']
+            overview = request.POST['overview']
+            poster_url = f'https://image.tmdb.org/t/p/w500{request.POST["poster_url"]}'
+            movie = {'title': title, 'movie_id': movie_id, 'overview': overview, 'poster_url': poster_url}
+            print(movie)
             context = {
                 'movie': movie,
             }
@@ -65,7 +79,12 @@ def index(request: HttpRequest):
             review_text = request.POST['text']
             rating = request.POST['rating']
             # remove from watchlist
-            temp = Watchlist.objects.filter(movie_id=movie_id)
+            if Watchlist.objects.filter(movie_id=movie_id).exists():
+                temp = Watchlist.objects.filter(movie_id=movie_id)
+                overview = temp[0].overview
+                temp.delete()
+            else:
+                overview = request.POST['overview']
             
             # check if movie already exists in seenlist
             if Seenlist.objects.filter(movie_id=movie_id).exists():
@@ -74,9 +93,9 @@ def index(request: HttpRequest):
                 return render(request, 'movies_app/index.html')
             # add to seenlist
             review = Seenlist(movie_id=movie_id, title=movie_name,
-                              review=review_text, rating=rating, date_watched=date.today(), overview=temp[0].overview)
+                              review=review_text, rating=rating, date_watched=date.today(), overview=overview)
             review.save()
-            temp.delete()
+            
             messages.success(request, f'"{movie_name}" review added!')
             return render(request, 'movies_app/index.html')
 

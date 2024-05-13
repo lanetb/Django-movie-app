@@ -22,13 +22,13 @@
                         {% csrf_token %}
                         <input type="submit" name="remove" value="Remove"
                             class="bg-slate-800 rounded-lg text-white hover:bg-slate-600 hover:cursor-pointer">
-                        <input type="hidden" name="movie_id" value="{{ movie.id }}">   
+                        <input type="hidden" name="movie_id" value="{{ movie.movie_id }}">   
                     </form>
                     <form method="POST" class="p-4">
                         {% csrf_token %}
                         <input type="submit" name="review" value="Review"
                             class="bg-slate-800 rounded-lg text-white hover:bg-slate-600 hover:cursor-pointer">
-                        <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                        <input type="hidden" name="movie_id" value="{{ movie.movie_id }}">
                     </form>
                 </div>
             </div>
