@@ -5,7 +5,7 @@
     {% if movies %}
     <div class="grid grid-cols-4 w-100% h-100% gap-4 p-5">
         {% for movie in movies %}
-        <div class="flex flex-row text-white border-white border-2 rounded-lg p-2 gap-2 hover:h-fit">
+        <div class="flex flex-row text-white border-white border-2 rounded-lg overflow-hidden gap-2 hover:h-fit">
             <div class="flex justify-center h-[200px] shrink-0 border-white basis-32 ">
                 <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}"
                     class="object-cover">
