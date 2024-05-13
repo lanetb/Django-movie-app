@@ -1,7 +1,7 @@
 {% extends 'movies_app/base.html' %}
 {% block content %}
-<div class="flex flex-col items-center justify-center w-full h-screen">
-    <h1 class="text-4xl text-white bungee-regular p-5">  Review for <span class="text-cyan-300">{{ movie.title }}</span>:</h1>
+<div class="flex flex-col items-center justify-center w-full h-screen ">
+    <h1 class="text-4xl text-white bungee-regular p-5 mt-[-100px]">  Review for <span class="text-cyan-300">{{ movie.title }}</span>:</h1>
     
     <form id="form" method="POST" class="flex flex-col p-2 text-black w-[900px] h-{500px} justify-center">
         {% csrf_token %}
@@ -12,7 +12,7 @@
         </div>
         <div class="flex flex-col justify-between py-5">
             <textarea name="text"  id="hiddenArea" class="p-2 mb-2 rounded-md"></textarea>
-            <div class="flex flex-row justify-between">
+            <div class="flex flex-row justify-end gap-2">
                 <div>
                     <input type="number" name="rating" min="0" max="100" placeholder="Rating" class="bg-white text-black p-2 w-[70px] rounded-md text-md copse-regular">
                     <label for="rating" class="text-white" class>/100</label>
