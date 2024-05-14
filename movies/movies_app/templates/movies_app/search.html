@@ -1,9 +1,9 @@
 {% extends 'movies_app/base.html' %}
 {% block content %}
 <div class="flex flex-col items-center">
-    <h1 class="p-5 text-4xl text-white bungee-regular">Search Results: </h1>
+    <h1 class="p-5 text-4xl text-white bungee-regular">Search Results:</h1>
     {% if movies %}
-    <div class="grid md:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 w-100% h-100% gap-4 p-5 ">
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 w-100% h-100% gap-4 p-5 ">
         {% for movie in movies %}
         <div class="flex flex-row text-white border-white border-2 rounded-lg overflow-hidden gap-2 hover:h-fit">
             <div class="flex justify-center h-[200px] shrink-0 border-white basis-32 ">
