@@ -10,10 +10,10 @@
         <div id="right" class="basis-2/3 flex flex-col rounded-lg copse-regular w-100% justify-center">
 
             <div id="title" class="flex flex-row items-center bungee-regular ">
-                <h1 class="p-2 text-[4em] shrink-1">{{ movie.title }} 
-                <span class="text-[.75em]">({{ year }})</span></h1>
+                <h1 class="p-2 text-6xl shrink-1">{{ movie.title }} 
+                <span class="text-4xl">({{ year }})</span></h1>
             </div>
-            <h2 class="px-2 text-[2.5em]">{{ movie.tagline }}</h2>
+            <h2 class="px-2 text-3xl">{{ movie.tagline }}</h2>
             <p class="px-2 py-4 text-xl">{{ movie.overview }}</p>
             <p class="p-2 text-xl">Genre: 
             {% for i in movie.genres %}

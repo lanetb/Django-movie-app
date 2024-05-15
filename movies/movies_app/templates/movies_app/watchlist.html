@@ -20,8 +20,9 @@
                 <div class="flex flex-row h-[100px] justify-end content-end p-5 gap-6 z-20">
                     <form method="POST" class="hover:cursor-pointer">
                         {% csrf_token %}
+                        <input type="hidden" name="movie_id" value="{{ movie.id }}">
                         <div class="group relative">
-                            <button type="submit" name="blog" value="See the Reviews" class="text-lg">
+                            <button type="submit" name="review" value="Review" class="text-lg">
                                 <svg stroke-linecap="round" stroke-width="2" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"
                                     fill="white" stroke="white"
                                     class="w-8 hover:scale-125 duration-200 hover:stroke-blue-500 text-white color-white">
