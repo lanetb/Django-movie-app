@@ -27,5 +27,5 @@ def run():
                     movie = Seenlist(title=row[0], movie_id=movie['id'], overview=movie['overview'])
                     movie.save()
                 else:
-                    movie = Watchlist(title=row[0], movie_id=movie['id'], overview=movie['overview'], poster_url=f'https://image.tmdb.org/t/p/w500{movie['poster_path']}')
+                    movie = Watchlist(title=row[0], movie_id=movie['id'], overview=movie['overview'], poster_url=f"https://image.tmdb.org/t/p/w500{movie['poster_path']}")
                     movie.save()

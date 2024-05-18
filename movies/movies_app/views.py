@@ -39,7 +39,7 @@ def index(request: HttpRequest):
             movie = request.POST['title']
             movie_id = request.POST['movie_id']
             overview = request.POST['overview']
-            poster_url = f'https://image.tmdb.org/t/p/w500{request.POST['poster_url']}'
+            poster_url = f"https://image.tmdb.org/t/p/w500{request.POST['poster_url']}"
             if Watchlist.objects.filter(movie_id=movie_id).exists():
                 messages.error(
                     request, f'"{movie}" already exists in your watchlist!')

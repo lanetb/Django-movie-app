@@ -3,21 +3,21 @@
 <div class="flex flex-col items-center">
     <h1 class="p-5 text-4xl text-white bungee-regular">Watchlist</h1>
     {% if movies %}
-    <div class="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 w-100% h-100% gap-4 p-5">
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 w-100% h-100% gap-4 p-5" >
         {% for movie in movies %}
-        <div class="flex flex-row text-white border-white border-2 rounded-lg over gap-2">
-            <div class="flex justify-center h-[200px] shrink-0 border-white basis-32 ">
-                <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="object-cover">
+        <div class="flex flex-row text-white border-white border-2 rounded-lg over gap-2 overflow-hidden">
+            <div class="flex justify-center h-[200px] shrink-0 border-white basis-32">
+                <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="object-cover ">
             </div>
-            <div class="flex flex-col h-fit">
-                <div class="flex flex-col overflow-hidden ">
-                    <h1 class="text-white text-md bungee-regular truncate hover:text-wrap">{{ movie.title }}</h1>
-                    <div class="h-[120px] overflow-hidden hover:text-wrap hover:h-fit">
-                        <p class="text-ellipsis hover:text-wrap">{{ movie.overview }}</p>
+            <div class="flex flex-col pr-2 overflow-hidden">
+                <div class="flex flex-col overflow-hidden text-elipse">
+                    <h1 class="text-white text-md bungee-regular hover:text-wrap overflow-hidden text-elipse text-nowrap">{{ movie.title }}</h1>
+                    <div class="h-[120px] hover:text-wrap hover:h-fit">
+                        <p class="hover:text-wrap text-elipse">{{ movie.overview }}</p>
                     </div>
                 </div>
             
-                <div class="flex flex-row h-[50px] justify-end content-end px-5 py-2 gap-6 z-20">
+                <div class="flex flex-row h-[50px] px-5 py-2 gap-6 z-20 justify-end">
                     <form method="POST" class="hover:cursor-pointer">
                         {% csrf_token %}
                         <input type="hidden" name="movie_id" value="{{ movie.id }}">
