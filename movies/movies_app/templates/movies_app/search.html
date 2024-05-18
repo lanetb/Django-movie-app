@@ -15,7 +15,7 @@
                 <div class="h-[120px] overflow-hidden text-ellipsis hover:h-fit">
                     <p class="text-ellipsis h-[120px] hover:h-fit">{{ movie.overview }}</p>
                 </div>
-                <div class="flex h-[50px] justify-end content-end gap-4 py-4">
+                <div class="flex h-[50px] justify-end content-end gap-4 py-4 ">
                     <form method="POST" class="">
                         {% csrf_token %}
                         <input type="submit" name="review_new" value="Review"

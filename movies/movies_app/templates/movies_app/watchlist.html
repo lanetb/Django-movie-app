@@ -5,19 +5,19 @@
     {% if movies %}
     <div class="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 w-100% h-100% gap-4 p-5">
         {% for movie in movies %}
-        <div class="flex flex-row text-white border-white border-2 rounded-lg overflow-hidden gap-2">
+        <div class="flex flex-row text-white border-white border-2 rounded-lg over gap-2">
             <div class="flex justify-center h-[200px] shrink-0 border-white basis-32 ">
                 <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="object-cover">
             </div>
-            <div class="flex flex-col h-[200px] overflow-hidden relative hover:h-fit">
-                <div class="flex flex-col h-[200px] overflow-hidden relative hover:h-fit">
-                    <h1 class="text-white text-md bungee-regular truncate hover:text-wrap ">{{ movie.title }}</h1>
-                    <div class="h-[120px] overflow-hidden text-ellipsis hover:text-wrap hover:h-fit">
-                        <p class="text-ellipsis h-[120px] hover:h-fit">{{ movie.overview }}</p>
+            <div class="flex flex-col h-fit">
+                <div class="flex flex-col overflow-hidden ">
+                    <h1 class="text-white text-md bungee-regular truncate hover:text-wrap">{{ movie.title }}</h1>
+                    <div class="h-[120px] overflow-hidden hover:text-wrap hover:h-fit">
+                        <p class="text-ellipsis hover:text-wrap">{{ movie.overview }}</p>
                     </div>
                 </div>
             
-                <div class="flex flex-row h-[100px] justify-end content-end p-5 gap-6 z-20">
+                <div class="flex flex-row h-[50px] justify-end content-end px-5 py-2 gap-6 z-20">
                     <form method="POST" class="hover:cursor-pointer">
                         {% csrf_token %}
                         <input type="hidden" name="movie_id" value="{{ movie.id }}">
