@@ -1,31 +1,47 @@
 {% extends 'movies_app/base.html' %}
 {% block content %}
 <div class="flex flex-col items-center">
-    <h1 class="p-5 text-4xl text-white bungee-regular">Search Results: </h1>
+    <h1 class="p-5 text-4xl text-white bungee-regular">Search Results:</h1>
     {% if movies %}
-    <div class="grid grid-cols-4 w-100% h-100% gap-4 p-5">
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 w-100% h-100% gap-4 p-5 ">
         {% for movie in movies %}
-            <div class="flex flex-row h-[200px]w-[360px] text-white border-white border-2 rounded-lg p-2 gap-2">
-                <div class="flex justify-center h-[200px] shrink-0 border-white basis-32 ">
-                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" class="object-cover">
+        <div class="flex flex-row text-white border-white border-2 rounded-lg overflow-hidden gap-2 hover:h-fit">
+            <div class="flex justify-center h-[200px] shrink-0 border-white basis-32 ">
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}"
+                    class="object-cover">
+            </div>
+            <div class="flex flex-col h-[200px] overflow-hidden relative hover:h-fit">
+                <h1 class="text-white text-md bungee-regular truncate hover:text-wrap">{{ movie.title }}</h1>
+                <div class="h-[120px] overflow-hidden text-ellipsis hover:h-fit">
+                    <p class="text-ellipsis h-[120px] hover:h-fit">{{ movie.overview }}</p>
                 </div>
-                <div class="flex flex-col h-[200px] overflow-hidden relative">
-                    <h1 class="text-white text-md bungee-regular truncate hover:text-wrap hover:text-xs">{{ movie.title }}</h1>
-                    <div class="h-[120px] overflow-hidden text-ellipsis">
-                        <p class="text-ellipsis h-[120px]">{{ movie.overview }}</p>
-                    </div>
-                    <form method="POST" class="absolute bottom-3 right-3">
-                    {% csrf_token %}
-                        <input type="submit" name="add_movie_to_database" value="Add" class="bg-slate-800 rounded-lg text-white hover:bg-slate-600 hover:cursor-pointer">
+                <div class="flex h-[50px] justify-end content-end gap-4 py-4 ">
+                    <form method="POST" class="">
+                        {% csrf_token %}
+                        <input type="submit" name="review_new" value="Review"
+                            class="bg-slate-800 rounded-lg text-white hover:bg-slate-600 hover:cursor-pointer">
                         <input type="hidden" name="movie_id" value="{{ movie.id }}">
                         <input type="hidden" name="title" value="{{ movie.title }}">
+                        <input type="hidden" name="overview" value="{{ movie.overview }}">
+                        <input type="hidden" name="poster_url" value="{{ movie.poster_path }}">
                     </form>
+                    <form method="POST" class="pr-4">
+                        {% csrf_token %}
+                        <input type="submit" name="add_movie_to_database" value="Add"
+                            class="bg-slate-800 rounded-lg text-white hover:bg-slate-600 hover:cursor-pointer">
+                        <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                        <input type="hidden" name="title" value="{{ movie.title }}">
+                        <input type="hidden" name="overview" value="{{ movie.overview }}">
+                        <input type="hidden" name="poster_url" value="{{ movie.poster_path }}">
+                    </form>
+                    
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
     {% else %}
-        <h1 class="text-6xl p-10">No movies found</h1>
+    <h1 class="text-6xl p-10">No movies found</h1>
     {% endif %}
 </div>
 {% endblock %}

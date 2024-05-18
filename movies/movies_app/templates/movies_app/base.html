@@ -128,6 +128,7 @@
               color: var(--color-primary);
               animation: shadows 1.2s ease-in infinite, move 1.2s ease-in infinite;
               letter-spacing: 0.4rem;
+              text-wrap: wrap;
             }
 
             @keyframes shadows {
@@ -197,7 +198,7 @@
       </style>
 </head>
 <body class="cool_bg">
-    <div class="flex justify-center">
+    <div class="flex justify-center h-screen">
         {% if messages %}
         {% for message in messages %}
 

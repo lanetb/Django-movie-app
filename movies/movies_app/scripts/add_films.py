@@ -24,8 +24,8 @@ def run():
             if movie and not Watchlist.objects.filter(movie_id = movie[0]["id"]).exists() and not Seenlist.objects.filter(movie_id = movie[0]["id"]).exists():
                 movie = movie[0]
                 if row[1] == 'True':
-                    movie = Seenlist(title=row[0], movie_id=movie['id'])
+                    movie = Seenlist(title=row[0], movie_id=movie['id'], overview=movie['overview'])
                     movie.save()
                 else:
-                    movie = Watchlist(title=row[0], movie_id=movie['id'])
+                    movie = Watchlist(title=row[0], movie_id=movie['id'], overview=movie['overview'], poster_url=f'https://image.tmdb.org/t/p/w500{movie['poster_path']}')
                     movie.save()
